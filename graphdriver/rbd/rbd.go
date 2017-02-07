@@ -7,7 +7,7 @@ import (
 	"fmt"
 	log "github.com/Sirupsen/logrus"
 	"github.com/docker/docker/pkg/parsers"
-	"github.com/docker/docker/pkg/units"
+	"github.com/moul/go-dl-extract/vendor/github.com/docker/docker/pkg/units"
 	"github.com/noahdesu/go-ceph/rados"
 	"github.com/noahdesu/go-ceph/rbd"
 	"github.com/opencontainers/runc/libcontainer/label"
@@ -691,7 +691,7 @@ func NewRbdSet(root string, doInit bool, options []string) (*RbdSet, error) {
 		case "rbd.basesize":
 			size, err := units.RAMInBytes(val)
 			if err != nil {
-				return nil, err
+			  	return nil, err
 			}
 			devices.baseImageSize = uint64(size)
 		case "rbd.datapool":

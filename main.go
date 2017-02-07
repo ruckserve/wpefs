@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/opts"
-	flag "github.com/docker/docker/pkg/mflag"
-	"github.com/hustcat/docker-graph-driver/api"
-	"github.com/hustcat/docker-graph-driver/driver"
+	flag "github.com/getgauge/mflag"
+	"github.com/wpengine/wpefs/api"
+	"github.com/wpengine/wpefs/graphdriver"
 	"os"
 )
 
@@ -23,14 +23,14 @@ var (
 )
 
 func init() {
-	installFlags()
+	 installFlags()
 }
 
 func installFlags() {
 	flag.BoolVar(&flDebug, []string{"D", "-debug"}, false, "Enable debug mode")
 	flag.StringVar(&flLogLevel, []string{"l", "-log-level"}, "info", "Set the logging level")
 	flag.StringVar(&root, []string{"g", "-graph"}, "/var/lib/docker", "Path to use as the root of the graph driver")
-	opts.ListVar(&graphOptions, []string{"-storage-opt"}, "Set storage driver options")
+	flag.Var(opts.NewListOptsRef(&graphOptions, nil), []string{"-storage-opt"}, "Set storage driver options")
 	flag.StringVar(&graphDriver, []string{"s", "-storage-driver"}, "", "Force the runtime to use a specific storage driver")
 }
 
@@ -55,7 +55,7 @@ func main() {
 
 	driver, err := graphdriver.New(root, graphOptions)
 	if err != nil {
-		logrus.Errorf("Create rbd driver failed: %v", err)
+		logrus.Errorf("Create gcloud driver failed: %v", err)
 		os.Exit(1)
 	}
 	h := api.NewHandler(driver)

@@ -5,7 +5,7 @@ package rbd
 import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/docker/docker/pkg/mount"
-	"github.com/hustcat/docker-graph-driver/driver"
+	"github.com/wpengine/wpefs/graphdriver"
 	"io/ioutil"
 	"os"
 	"path"
