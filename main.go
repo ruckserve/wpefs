@@ -5,13 +5,13 @@ import (
 	"github.com/Sirupsen/logrus"
 	"github.com/docker/docker/opts"
 	flag "github.com/getgauge/mflag"
-	"github.com/wpengine/wpefs/api"
+	"github.com/wpengine/wpefs/gcloud_api"
 	"github.com/wpengine/wpefs/graphdriver"
 	"os"
 )
 
 const (
-	socketAddress = "/run/docker/plugins/rbd.sock"
+	socketAddress = "/run/docker/plugins/wpefs.sock"
 )
 
 var (
@@ -58,7 +58,7 @@ func main() {
 		logrus.Errorf("Create gcloud driver failed: %v", err)
 		os.Exit(1)
 	}
-	h := api.NewHandler(driver)
+	h := gcloud_api.NewHandler(driver)
 	logrus.Infof("listening on %s\n", socketAddress)
 	fmt.Println(h.ServeUnix("root", socketAddress))
 }

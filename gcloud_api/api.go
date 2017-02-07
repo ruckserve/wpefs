@@ -1,4 +1,4 @@
-package main
+package gcloud_api
 
 import (
 	"fmt"

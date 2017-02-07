@@ -26,7 +26,7 @@ var (
 	// All registred drivers
 	drivers map[string]InitFunc
 	// Slice of drivers that should be used in an order
-	priority = []string{"vfs", "rbd", }
+	priority = []string{"vfs", "wpefs", }
 
 	ErrNotSupported   = errors.New("driver not supported")
 	ErrPrerequisites  = errors.New("prerequisites for driver not satisfied (wrong filesystem?)")
